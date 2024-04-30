@@ -1,0 +1,48 @@
+name: basicvsr
+# model
+model_type: FOSBaseVideoModel
+fidelity_weight: 0.5
+
+num_gpu: 1 # set num_gpu: 0 for cpu mode
+face_size: 128
+save_ext: png
+save_suffix: '' # restored images: [orginal_name][save_suffix].[save_ext]
+
+datasets:
+  props:
+    mean: [0.5, 0.5, 0.5]
+    std: [0.5, 0.5, 0.5]
+    face_size: 512
+    
+  test_v_wild:  # the 1st test dataset
+    name: fos_v
+    type: FosVideoDataset
+    dataroot_lq: data/user_study/fos_v    # VSR models use the raw clips(no cropped faces)
+    
+    seq_length: 5         # seq length
+    padding: 'reflection' # how to pad the seq when center frame is in the head/tail
+    save_video_fps: 25    # -1: do not save as video format
+
+val:
+    metrics:
+      psnr: # metric name, can be arbitrary
+        type: calculate_psnr
+        crop_border: 0
+        test_y_channel: true
+      ssim:
+        type: calculate_ssim
+        crop_border: 0
+        test_y_channel: true
+
+# network related (e.g. structures
+network_g:
+  # The model same with the released version from CodeFormer
+  type: BasicVSR
+  num_feat: 64
+  num_block: 30
+
+# path
+path:
+  # pretrained network from vfhq(https://liangbinxie.github.io/projects/vfhq/)
+  pretrain_model: net_g_300000.pth
+  pretrain_model_url: ~ # no access to the download direct link

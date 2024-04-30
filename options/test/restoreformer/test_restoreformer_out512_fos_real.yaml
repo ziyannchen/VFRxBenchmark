@@ -1,0 +1,63 @@
+name: restoreformer
+model_type: RestoreFormerModel
+
+num_gpu: 1 # set num_gpu: 0 for cpu mode
+save_suffix: ''
+# FaceRestoreHelper
+helper:
+  upscale_factor: 1
+  save_ext: png
+  use_parse: True
+
+datasets:
+  props:
+    mean: [0.5, 0.5, 0.5]
+    std: [0.5, 0.5, 0.5]
+    face_size: 512
+
+  test_wild:
+    name: fos_real
+    type: FosSingleImageDataset
+    dataroot_lq: data/fos_real/fos_real_aligned
+    meta_info_file: data/fos_real/fos_real.pathlist
+    aligned: true
+
+    metrics: [niqe, fid_folder, serfiq, maniqa]
+
+# network related (e.g. structures
+network_g:
+  # The model same with the released version from CodeFormer
+  type: RestoreFormer
+
+  # the benchmark used the default setting
+  n_embed: 1024
+  embed_dim: 256
+  ch: 64
+  out_ch: 3
+  ch_mult: [1, 2, 2, 4, 4, 8]
+  num_res_blocks: 2
+  attn_resolutions: [16]
+  dropout: 0.0
+
+  in_channels: 3
+  resolution: 512
+  z_channels: 256
+  double_z: False
+  enable_mid: True
+
+  fix_decoder: False
+  fix_codebook: True
+  fix_encoder: False
+  head_size: 8
+
+# FaceRestoreHelper
+upscale: 1
+aligned: true
+face_size: 512
+save_ext: png
+use_parse: True
+
+# path
+path:
+  pretrain_network: RestoreFormer.pth
+  pretrain_model_url: https://github.com/TencentARC/GFPGAN/releases/download/v1.3.4/RestoreFormer.pth

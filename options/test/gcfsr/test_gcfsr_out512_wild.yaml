@@ -1,0 +1,32 @@
+name: gcfsr
+model_type: GCFSRModel
+
+num_gpu: 1 # set num_gpu: 0 for cpu mode
+save_suffix: ''
+# FaceRestoreHelper
+helper:
+  upscale_factor: 1
+  save_ext: png
+  use_parse: True
+
+datasets:
+  props:
+    mean: [0.5, 0.5, 0.5]
+    std: [0.5, 0.5, 0.5]
+    face_size: 512
+
+  test_wild:
+    name: test_wild
+    type: FosSingleImageDataset
+    dataroot_lq: data/fos_real/fos_real_aligned/normal
+    aligned: true
+
+    metrics: [niqe, fid_folder, serfiq, maniqa]
+
+network_g:
+  type: GCFSR_blind
+  out_size: 512
+
+# path
+path:
+  pretrain_model: 'gcfsr_blind_512.pth'

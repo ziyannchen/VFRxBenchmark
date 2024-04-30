@@ -1,0 +1,24 @@
+results/
+experiments/
+data/
+weights/
+logs/
+stats/
+bfrxlib/baseline
+**/__pycache__
+
+# setup tools
+.eggs/
+*.egg-info/
+.ipynb_checkpoints/
+
+*.pyc
+*.mp4
+*.avi
+*.log
+*.zip
+
+*.pth
+*.h5
+*.npz
+*.params

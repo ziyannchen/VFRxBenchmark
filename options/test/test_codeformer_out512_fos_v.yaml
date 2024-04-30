@@ -1,0 +1,31 @@
+name: codeformer
+# model
+model_type: CodeFormerModel
+fidelity_weight: 0.5
+
+num_gpu: 1 # set num_gpu: 0 for cpu mode
+# to save the results with a suffix as: [original_name][save_suffix].[save_ext]
+save_suffix: ''
+# FaceRestoreHelper
+helper:
+  upscale_factor: 1
+  save_ext: png
+  use_parse: True
+
+dataset:
+  name: fos_v
+  type: FosVideoDataset
+  mean: [0.5, 0.5, 0.5]
+  std: [0.5, 0.5, 0.5]
+  
+  dataroot_lq: /cpfs01/user/chenziyan/data/wild_face
+  face_size: 512
+  aligned: false
+  only_center_face: true
+  
+  seq_length: 1
+  padding: 'reflection'
+
+# path
+path:
+  results_root: results/codeformer/fos_v

@@ -1,0 +1,25 @@
+# Pre-Processing faces from the data in the wild
+db:
+  name: 'refine'             # the base name to save as a result dirs
+  save_ext: 'jpg'
+  imwrite_arg: [cv2.IMWRITE_JPEG_QUALITY, 100]          # the argument to pass to cv2.imwrite
+
+to_refine: True           # To refine the cropped clip based on face recognition in case there are id-switches
+
+clip:
+  # Clip crop
+  save_size: 128       # size of a cropped clip to reshape
+  min_len: 50          # minimum length of a clip
+  max_len: 1500        # maximum length of a clip
+  min_face_res: 20               # the min resolution of the face to filter out severe degraded targets
+  drop_trans_frames: 50     # Drop possible transition frames at the tail of the video
+  bbox_margin_rate: 0.3     # adaptively add margin to the detected face bbox for better detection results
+
+  save_fps: 25         # fps(frames per second) of the cropped clips to save
+  to_frame_interval: 5
+
+# Detection
+det:
+  model: 'retinaface_resnet50'
+  conf_thresh: 0.95       # confidence threshold of the detected face
+  

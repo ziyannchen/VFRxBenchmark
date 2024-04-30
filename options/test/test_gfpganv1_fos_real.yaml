@@ -1,0 +1,59 @@
+# just keep the name
+name: gfpgan
+model_type: GFPGANModel
+
+num_gpu: 1 # set num_gpu: 0 for cpu mode
+save_suffix: ''
+# FaceRestoreHelper
+helper:
+  upscale_factor: 1
+  save_ext: png
+  use_parse: True
+
+dataset:
+  name: test_vfhq
+  type: FosSingleImageDataset
+  dataroot_lq: data/vfhq/interval1_LR_Blind_128
+  meta_info_file: data/vfhq/interval1_LR_Blind.pathlist
+  aligned: false
+  only_center_face: ~
+
+  mean: [0.5, 0.5, 0.5]
+  std: [0.5, 0.5, 0.5]
+  face_size: 512
+
+  # name: fos_real
+  # type: FosSingleImageDataset
+  # dataroot_lq: data/fos_real/fos_real_aligned
+  # meta_info_file: data/fos_real/fos_real.pathlist
+  # aligned: true
+  # only_center_face: ~
+
+  # metrics: [niqe, serfiq, maniqa]
+
+# path
+path:
+  results_path: results/gfpganv1/vfhq/vfhq_test_128_interval1
+  logs_root: logs/gfpganv1/vfhq/
+  pretrained_model: ～
+  # the benchmark used GFPGAN model v1.4
+  # pretrained_model_url: 'https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.4.pth'
+  pretrained_model_url: https://github.com/TencentARC/GFPGAN/releases/download/v0.1.0/GFPGANv1.pth
+
+# network related (e.g. structures
+network_g:
+  # The model same with the released version from CodeFormer
+  type: GFPGANv1
+
+  # the benchmark used the default setting
+  channel_multiplier: 1
+  out_size: 512
+  num_style_feat: 512
+  decoder_load_path: ~
+  fix_decoder: true
+  # for stylegan decoder
+  num_mlp: 8
+  input_is_latent: true
+  different_w: true
+  narrow: 1
+  sft_half: true

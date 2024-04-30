@@ -1,0 +1,92 @@
+name: vqfr
+# model
+model_type: VQFRModel
+fidelity_ratio: 0.1
+
+num_gpu: 1 # set num_gpu: 0 for cpu mode
+save_suffix: ''
+# FaceRestoreHelper
+helper:
+  upscale_factor: 1
+  save_ext: png
+  use_parse: True
+
+datasets:
+  props:
+    mean: [0.5, 0.5, 0.5]
+    std: [0.5, 0.5, 0.5]
+    face_size: 512
+
+  test_v_syn:  # the 1st test dataset
+    name: VFHQ
+    type: FosPairedVideoDataset
+    dataroot_lq: data/vfhq/Interval5_BlindLR_128x128_LANCZOS4_paper_aligned
+    dataroot_gt: data/vfhq/Interval5_512x512_LANCZOS4
+    aligned: true
+
+    seq_length: 1
+    padding: 'reflection'
+    metrics: [psnr, ssim, lpips, serfiq, maniqa, fid_folder, vidd]
+
+  # test_v_wild:  # the 1st test dataset
+  #   name: FOSv
+  #   type: FosPairedVideoDataset
+  #   dataroot_lq: data/user_study/fos_v_aligned
+  #   aligned: true
+
+  #   seq_length: 1
+  #   padding: 'reflection'
+  #   metrics: [psnr]
+
+# validation settings
+val:
+  # save_img: true
+  # center_frame_only: true
+  # suffix: ~  # add suffix to saved images, if None, use exp name
+
+  metrics:
+    niqe:
+      type: calculate_niqe_fos
+    fid_folder: # metric name, can be arbitrary
+      type: calculate_fid_folder
+      fid_stats: weights/stats/inception_FFHQ_512.pth
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr_fos
+      crop_border: 0
+      test_y_channel: false
+    ssim:
+      type: calculate_ssim_fos
+      crop_border: 0
+      test_y_channel: false
+
+# network related (e.g. structures
+network_g:
+  # The model same with the released version from CodeFormer
+  type: VQFRv2
+
+  # the benchmark used the default setting
+  base_channels: 64
+  channel_multipliers: [1, 2, 2, 4, 4, 8]
+  num_enc_blocks: 2
+  use_enc_attention: True
+  num_dec_blocks: 2
+  use_dec_attention: True
+  code_dim: 256
+  inpfeat_dim: 32
+  align_opt: {
+      'cond_channels': 32,
+      'deformable_groups': 4
+  }
+  code_selection_mode: 'Predict'  # Predict/Nearest
+  quantizer_opt: {
+      'type': 'L2VectorQuantizer',
+      'num_code': 1024,
+      'code_dim': 256,
+      'spatial_size': [16, 16]
+  }
+
+# path
+path:
+  # model
+  pretrain_network: VQFR_v2.pth
+  pretrain_model_url: https://github.com/TencentARC/VQFR/releases/download/v2.0.0/VQFR_v2.pth

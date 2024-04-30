@@ -1,0 +1,39 @@
+name: basicvsr
+# model
+model_type: FOSBaseVideoModel
+
+num_gpu: 1 # set num_gpu: 0 for cpu mode
+save_suffix: '' # save restored image name: [orginal_basename][save_suffix].[save_ext]
+helper: 
+  upscale: 4
+  save_ext: png
+
+# path
+path:
+  # pretrained network from vfhq(https://liangbinxie.github.io/projects/vfhq/)
+  pretrained_model: weights/basicvsr_vfhq_300000.pth
+  pretrained_model_url: ~ 
+  results_path: tmp/results/basicvsrx4_300000/vfhq_interval1
+  logs_root: tmp/logs/basicvsr/
+
+dataset:
+  name: vfhq
+  type: FosVideoDataset
+  # dataroot_lq: data/vfhq/Interval5_BlindLR_128x128_LANCZOS4_paper_aligned_128
+  dataroot_lq: /cpfs01/user/chenziyan/BFRxBenchmark/data/vfhq/interval1_LR_Blind
+  # dataroot_gt: data/vfhq/Interval5_512_gt_aligned
+  
+  seq_length: 7         # seq length
+  padding: 'reflection' # how to pad the seq when center frame is in the head/tail
+  save_video_fps: 25    # -1: do not save as video format
+
+  mean: [0.5, 0.5, 0.5]
+  std: [0.5, 0.5, 0.5]
+  face_size: 128
+
+# network related (e.g. structures
+network_g:
+  # The model same with the released version from CodeFormer
+  type: BasicVSR
+  num_feat: 64
+  num_block: 30

@@ -1,0 +1,29 @@
+name: edvr
+# model
+model_type: FOSBaseVideoModel
+
+num_gpu: 1 # set num_gpu: 0 for cpu mode
+save_suffix: ''
+
+# FaceRestoreHelper
+helper:
+  save_ext: png
+
+# path
+path:
+  results_root: tmp/results/edvr_aligned/vfhq_aligned_interval1
+  pretrained_model: ~
+
+dataset:
+  name: fos_v
+  type: FosVideoDataset
+  mean: [0.5, 0.5, 0.5]
+  std: [0.5, 0.5, 0.5]
+  
+  dataroot_lq: data/vfhq/interval1_LR_Blind
+  face_size: 512
+  aligned: ~
+  only_center_face: ~
+  
+  seq_length: 1
+  padding: 'reflection'

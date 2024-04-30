@@ -1,0 +1,45 @@
+name: gpen
+# model
+model_type: GPENModel
+is_norm: true
+alpha: 1                # blending the results
+
+num_gpu: 1 # set num_gpu: 0 for cpu mode
+save_suffix: ''
+# FaceRestoreHelper
+helper:
+  upscale_factor: 1
+  save_ext: png
+  use_parse: True
+
+datasets:
+  props:
+    mean: [0.5, 0.5, 0.5]
+    std: [0.5, 0.5, 0.5]
+    face_size: 512
+
+  test_syn:
+    name: fos_syn
+    type: FosPairedImageDataset
+    dataroot_lq: data/fos_syn/fos_syn
+    dataroot_gt: data/fos_syn/fos_syn_gt
+    meta_info_file: data/fos_syn/fos_syn.pathlist
+    aligned: true
+
+    metrics: [psnr, ssim, lpips, serfiq, niqe, maniqa, fid_folder]
+
+network_g:
+  type: FullGenerator
+
+  size: 512               # input resolution
+  style_dim: 512
+  n_mlp: 8
+  channel_multiplier: 2   # channel multiplier of GPEN
+  blur_kernel: [1, 3, 3, 1]
+  lr_mlp: 0.01
+  isconcat: true
+  narrow: 1               # channel narrow scale
+
+# path
+path:
+  pretrain_network: 'GPEN-BFR-512.pth'
