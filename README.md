@@ -19,6 +19,11 @@
 
 <img src='docs/figures/fos_syn_samples.png' width="100%" align='center'> -->
 
+<br>
+🌟 If you find the work is helpful for you, please help to star this repo~! 🤗
+
+<br>
+
 # 🧩 Dataset
 
 | Dataset | Samples # | Source | Download |
