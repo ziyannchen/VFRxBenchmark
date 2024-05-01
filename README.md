@@ -2,7 +2,7 @@
 
 <div align="center">
 
-📜 [Paper]() | 📃 [ArXiv]() | 🏰 [HomePage]()
+📜 [Paper]() | 📃 [ArXiv](http://arxiv.org/abs/2404.19500) | 🏰 [HomePage](https://ziyannchen.github.io/projects/VFRxBenchmark/)
 <!-- | User Study 🚀 [Playground]()-->
 </div>
 
@@ -19,14 +19,15 @@
 
 <img src='docs/figures/fos_syn_samples.png' width="100%" align='center'> -->
 
-# Dataset
+# 🧩 Dataset
 
 | Dataset | Samples # | Source | Download |
 |:---:|:---:|:---:|:---:|
-|**FOS-real**| 4253 | [YTCeleb](http://seqamlab.com/youtube-celebrities-face-tracking-and-recognition-dataset/), [YTFace](https://www.cs.tau.ac.il/\~wolf/ytfaces/) <br> (YouTube Videos) | [BaiduCloud](https://pan.baidu.com/s/1XcDS9hxatLnOumh-JKtj1A?pwd=jzkt) \| [OneDrive](https://mailsdueducn-my.sharepoint.com/:f:/g/personal/201900810039_mail_sdu_edu_cn/EmTCsAa_3NBKg1YVZlmnbg0BH9xhgYvdjUkyy8gsjVr-Og?e=hhXxqL) |
-|**FOS-syn**| 3150 | CelebA-Test #3k | [BaiduCloud](https://pan.baidu.com/s/1zyFBssQIC74xs0UxPuRBBQ?pwd=vpay) \| [OneDrive](https://mailsdueducn-my.sharepoint.com/:f:/g/personal/201900810039_mail_sdu_edu_cn/Ep-rMpGJe6VOtp1snt8ZmgUBg4RUHG9DY5lomKemDIhZtA?e=L9uEak) |
-|**FOS-v**| 3316 | [YTCeleb](http://seqamlab.com/youtube-celebrities-face-tracking-and-recognition-dataset/), [YTFace](https://www.cs.tau.ac.il/\~wolf/ytfaces/) <br> (YouTube Videos) | [BaiduCloud](https://pan.baidu.com/s/1yH7A1wOrjeGijSA99Wza-A?pwd=bv60) \| [OneDrive](https://mailsdueducn-my.sharepoint.com/:f:/g/personal/201900810039_mail_sdu_edu_cn/EqWrLikis8VAvkJzGlgqbJQBbaiim1VrcnXATZjB8aJ6IA?e=1VNDNV) |
-|**FOS-real #158** <br> **FOS-v #108** |158<br>108| FOS-real <br>FOS-v | [BaiduCloud](https://pan.baidu.com/s/1I1ZmeYhGf_rXPQUQd4YlJQ?pwd=ugs5)  |
+|**FOS-real** <br> **FOS-real (#158)**| 4,253 <br> 158 | FOS-V | [BaiduCloud](https://pan.baidu.com/s/1XcDS9hxatLnOumh-JKtj1A?pwd=jzkt) \| [OneDrive](https://mailsdueducn-my.sharepoint.com/:f:/g/personal/201900810039_mail_sdu_edu_cn/EmTCsAa_3NBKg1YVZlmnbg0BH9xhgYvdjUkyy8gsjVr-Og?e=hhXxqL) |
+|**FOS-syn**| 3,150 | [CelebA-HQ Test(5k)](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) | [BaiduCloud](https://pan.baidu.com/s/1zyFBssQIC74xs0UxPuRBBQ?pwd=vpay) \| [OneDrive](https://mailsdueducn-my.sharepoint.com/:f:/g/personal/201900810039_mail_sdu_edu_cn/Ep-rMpGJe6VOtp1snt8ZmgUBg4RUHG9DY5lomKemDIhZtA?e=L9uEak) |
+|**FOS-V** <br> **FOS-v (#108)**| 3,316 <br> 108 | [YTCeleb](http://seqamlab.com/youtube-celebrities-face-tracking-and-recognition-dataset/), [YTFace](https://www.cs.tau.ac.il/\~wolf/ytfaces/), YTW | [BaiduCloud](https://pan.baidu.com/s/1yH7A1wOrjeGijSA99Wza-A?pwd=bv60) \| [OneDrive](https://mailsdueducn-my.sharepoint.com/:f:/g/personal/201900810039_mail_sdu_edu_cn/EqWrLikis8VAvkJzGlgqbJQBbaiim1VrcnXATZjB8aJ6IA?e=1VNDNV) |
+
+More details about the datasets, please see this [documentation](docs/datasets.md).
 
 # :sparkles: Library Overview
 
@@ -57,10 +58,10 @@ This repo is build with reference to [BasicSR](https://github.com/XPixelGroup/Ba
 * 4/30/2024 This repo is released.
 
     ### *TODO*
-- [ ] Support background enhancement.
-<!-- - [ ] Google colab demo. -->
+<!-- - [ ] Support background enhancement. -->
 - [ ] Release playground page & Web-page source codes of the user study web GUI.
-
+<!-- Paper link -->
+<!-- add citation -->
 
 # 🔧 Dependencies & Installation
 
@@ -113,7 +114,7 @@ Since this repo emsembles multiple methods, the environment installation can be 
     pip install mxnet-cu110 # e.g. mxnet-cu113
     ```
 
-# Run
+# ⚡ Run
 ## Quick Inference
 
 <!-- The inference settings are mainly defined from the option .yaml file. -->
@@ -145,13 +146,16 @@ python scripts/calculate_metrics.py \
 -m musiq ifqa
 ```
 
-# Agreement
+# 📄 Agreement
 - FOS dataset is only available to download for non-commercial research purposes. The copyright remains with the original owners of the images/videos. A complete version of the license can be found [here](LICENSE). Any download and use of FOS dataset represents to agree the released FOS License by default.
 - All videos of the FOS dataset are obtained from the Internet which are not property of our institutions. Our institution are not responsible for the content nor the meaning of these videos.
 - You agree not to reproduce, duplicate, copy, sell, trade, resell or exploit for any commercial purposes, any portion of the videos and any portion of derived data. You agree not to further copy, publish or distribute any portion of the FOS dataset.
 - The distribution of identities in the FOS datasets may not be representative of the global human population. Please be careful of unintended societal, gender, racial and other biases when training or deploying models trained on this data.
 
-# 🌏Citation
+<!-- # 🌏 Citation
 
 ```
-```
+``` -->
+
+# 📧 Contact
+Feel free to reach out at `chen.ziyan@outlook.com` if you have any questions.
