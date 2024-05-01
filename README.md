@@ -38,11 +38,13 @@ As introduced in the table below, we support
 - Models: **6 BFR** methods and **4 VSR** methods,
 - Metrics: **8 general IQA** & **5 FIQA** metrics.
 
-| Library | Source | Original License | Comments |
-|:---:|:---:|:---:|:---|
-|**Preprocessing Pipelines**| *Face-clip extraction* (Face detection, tracking & recognition involved) |-| Refer to [FaceXLib](https://github.com/xinntao/facexlib) & [VFHQ](https://liangbinxie.github.io/projects/vfhq/) |
-|**Models**| 1.*BFR models*: [CodeFormer](https://github.com/sczhou/CodeFormer), [RestoreFormer](https://github.com/wzhouxiff/RestoreFormer), [VQFR](https://github.com/TencentARC/VQFR), [GCFSR](https://github.com/hejingwenhejingwen/GCFSR), [GFPGAN](https://github.com/TencentARC/GFPGAN), [GPEN](https://github.com/yangxy/GPEN)<br>2.*VSR models*: [EDVR](https://github.com/xinntao/EDVR) (EDVR-GAN), [BasicVSR](https://github.com/ckkelvinchan/BasicVSR-IconVSR) (BasicVSR-GAN)|-|VSR models are from [VFHQ](https://liangbinxie.github.io/projects/vfhq/)|
-|**Metrics**| PSNR, SSIM, LPIPS, FID, NIQE, [BRISQUE](https://ieeexplore.ieee.org/document/6272356), [HyperIQA](https://github.com/SSL92/hyperIQA), [MUSIQ](https://github.com/google-research/google-research/tree/master/musiq), [MANIQA](https://github.com/IIGROUP/MANIQA), <br>[SER-FIQ](https://github.com/pterhoer/FaceImageQuality), [FaceQnet](https://github.com/javier-hernandezo/FaceQnet), [SDD-FIQA](https://github.com/Slinene/SDD-FIQA),  [IFQA](https://github.com/VCLLab/IFQA) |-|Refer to [pyiqa](https://pypi.org/project/pyiqa/) |
+| Library | Source | Comments |
+|:---:|:---:|:---:|
+|**Preprocessing Pipelines**| *Face-clip extraction* (Face detection, tracking & recognition involved) | Refer to [FaceXLib](https://github.com/xinntao/facexlib) & [VFHQ](https://liangbinxie.github.io/projects/vfhq/) |
+|**Models**| 1.*BFR models*: [CodeFormer](https://github.com/sczhou/CodeFormer), [RestoreFormer](https://github.com/wzhouxiff/RestoreFormer), [VQFR](https://github.com/TencentARC/VQFR), [GCFSR](https://github.com/hejingwenhejingwen/GCFSR), [GFPGAN](https://github.com/TencentARC/GFPGAN), [GPEN](https://github.com/yangxy/GPEN)<br>2.*VSR models*: [EDVR](https://github.com/xinntao/EDVR) (EDVR-GAN), [BasicVSR](https://github.com/ckkelvinchan/BasicVSR-IconVSR) (BasicVSR-GAN)|VSR models are from [VFHQ](https://liangbinxie.github.io/projects/vfhq/)|
+|**Metrics**| PSNR, SSIM, LPIPS, FID, NIQE, [BRISQUE](https://ieeexplore.ieee.org/document/6272356), [HyperIQA](https://github.com/SSL92/hyperIQA), [MUSIQ](https://github.com/google-research/google-research/tree/master/musiq), [MANIQA](https://github.com/IIGROUP/MANIQA), <br>[SER-FIQ](https://github.com/pterhoer/FaceImageQuality), [FaceQnet](https://github.com/javier-hernandezo/FaceQnet), [SDD-FIQA](https://github.com/Slinene/SDD-FIQA),  [IFQA](https://github.com/VCLLab/IFQA) |Refer to [pyiqa](https://pypi.org/project/pyiqa/) |
+
+**Please refer to their original license for use of different purposes.**
 
 In our work, we studied the applicability of new IQA metrics by measuring their consistency with subjective evaluations:
 
