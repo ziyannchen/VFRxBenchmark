@@ -27,7 +27,7 @@
 |**FOS-syn**| 3,150 | [CelebA-HQ Test(5k)](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) | [BaiduCloud](https://pan.baidu.com/s/1zyFBssQIC74xs0UxPuRBBQ?pwd=vpay) \| [OneDrive](https://mailsdueducn-my.sharepoint.com/:f:/g/personal/201900810039_mail_sdu_edu_cn/Ep-rMpGJe6VOtp1snt8ZmgUBg4RUHG9DY5lomKemDIhZtA?e=L9uEak) |
 |**FOS-V** <br> **FOS-v (#108)**| 3,316 <br> 108 | [YTCeleb](http://seqamlab.com/youtube-celebrities-face-tracking-and-recognition-dataset/), [YTFace](https://www.cs.tau.ac.il/\~wolf/ytfaces/), YTW | [BaiduCloud](https://pan.baidu.com/s/1yH7A1wOrjeGijSA99Wza-A?pwd=bv60) \| [OneDrive](https://mailsdueducn-my.sharepoint.com/:f:/g/personal/201900810039_mail_sdu_edu_cn/EqWrLikis8VAvkJzGlgqbJQBbaiim1VrcnXATZjB8aJ6IA?e=1VNDNV) |
 
-More details about the datasets, please see this [documentation](docs/datasets.md).
+For more details about the datasets, please see this [documentation](docs/datasets.md).
 
 # :sparkles: Library Overview
 
