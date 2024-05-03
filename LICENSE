@@ -1,6 +1,6 @@
-FOS datasets
+FOS face datasets
 
-FOS test datasets is consist of three sub-datasets: FOS-real, FOS-syn and FOS-v. The are originated from (i) the publicly available datasets, including YTCeleb(http://seqamlab.com/youtube-celebrities-face-tracking-and-recognition-dataset/) and YTFace(https://www.cs.tau.ac.il/\~wolf/ytfaces/), and (ii) the self-collected video data from YouTube, for which we provide YouTube URLs, associated face detections, and timestamp. 
+FOS face test datasets is consist of three sub-datasets: FOS-real, FOS-syn and FOS-v. The are originated from (i) the publicly available datasets, including YTCeleb(http://seqamlab.com/youtube-celebrities-face-tracking-and-recognition-dataset/) and YTFace(https://www.cs.tau.ac.il/\~wolf/ytfaces/), and (ii) the self-collected video data from YouTube, for which we provide YouTube URLs, associated face detections, and timestamp. 
 
 The copyright of data(all images/videos) from FOS test sets remains with the original owners.
 
