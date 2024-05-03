@@ -63,11 +63,14 @@ This repo is build with reference to [BasicSR](https://github.com/XPixelGroup/Ba
 
 
 # 🚩 What's new
-* 4/30/2024 This repo is released.
 
-    ### *TODO*
+* 2024/05/02 - 🚀 [User study page playground](https://ziyannchen.github.io/fos_user_study_page) released.
+* 2024/4/30 - This repo is released.
+
+    ### TODO
+
 <!-- - [ ] Support background enhancement. -->
-- [ ] Release playground page & Web-page source codes of the user study web GUI.
+- [x] Release playground page & Web-page source codes of the user study web GUI.
 <!-- Paper link -->
 <!-- add citation -->
 
