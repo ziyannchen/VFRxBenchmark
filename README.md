@@ -3,8 +3,9 @@
 <div align="center">
 
 <!-- 📜 [Paper]() |  -->
-📃 [ArXiv](http://arxiv.org/abs/2404.19500) | 🏰 [HomePage](https://ziyannchen.github.io/projects/VFRxBenchmark/)
-| 🚀 [Playground](https://ziyannchen.github.io/fos_user_study_page)
+🏰 [HomePage](https://ziyannchen.github.io/projects/VFRxBenchmark/) | 📃 [Paper](http://arxiv.org/abs/2404.19500)
+
+User study Page  🚀 [Playground](https://ziyannchen.github.io/fos_user_study_page) | 🧩[Source Code](https://github.com/ziyannchen/fos_user_study_page)
 </div>
 
 **FOS**(**F**ull, **O**ccluded, **S**ide)-face test datasets are proposed to cover faces of more complex scenarios from the real-world for comprehensive real-world performance evaluation of blind face restoration(BFR). With hard cases of side & occluded face, media of image & video invovled, FOS dataset contains 3 sub-datasets : **FOS-real**, **FOS-syn** and **FOS-v**. 
