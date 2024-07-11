@@ -5,7 +5,7 @@
 <!-- 📜 [Paper]() |  -->
 🏰 [HomePage](https://ziyannchen.github.io/projects/VFRxBenchmark/) | 📃 [Paper](http://arxiv.org/abs/2404.19500)
 
-User study Page  🚀 [Playground](https://ziyannchen.github.io/fos_user_study_page) | 🧩[Source Code](https://github.com/ziyannchen/fos_user_study_page)
+User study Page  🚀 [Playground](https://ziyannchen.github.io/fos_user_study_page) | 🧩 [Source Code](https://github.com/ziyannchen/fos_user_study_page)
 </div>
 
 **FOS**(**F**ull, **O**ccluded, **S**ide)-face test datasets are proposed to cover faces of more complex scenarios from the real-world for comprehensive real-world performance evaluation of blind face restoration(BFR). With hard cases of side & occluded face, media of image & video invovled, FOS dataset contains 3 sub-datasets : **FOS-real**, **FOS-syn** and **FOS-v**. 
@@ -164,10 +164,18 @@ python scripts/calculate_metrics.py \
 - You agree not to reproduce, duplicate, copy, sell, trade, resell or exploit for any commercial purposes, any portion of the videos and any portion of derived data. You agree not to further copy, publish or distribute any portion of the FOS dataset.
 - The distribution of identities in the FOS datasets may not be representative of the global human population. Please be careful of unintended societal, gender, racial and other biases when training or deploying models trained on this data.
 
-<!-- # 🌏 Citation
+# 🌏 Citation
 
 ```
-``` -->
+@InProceedings{Chen_2024_CVPR,
+    author    = {Chen, Ziyan and He, Jingwen and Lin, Xinqi and Qiao, Yu and Dong, Chao},
+    title     = {Towards Real-world Video Face Restoration: A New Benchmark},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+    month     = {June},
+    year      = {2024},
+    pages     = {5929-5939}
+}
+```
 
 # 📧 Contact
 Feel free to reach out at `chen.ziyan@outlook.com` if you have any questions.

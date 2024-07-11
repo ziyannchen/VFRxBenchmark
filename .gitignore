@@ -3,6 +3,7 @@ experiments/
 data/
 weights/
 logs/
+tmp/
 stats/
 bfrxlib/baseline
 **/__pycache__
