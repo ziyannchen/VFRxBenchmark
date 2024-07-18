@@ -5,7 +5,6 @@ weights/
 logs/
 tmp/
 stats/
-bfrxlib/baseline
 **/__pycache__
 
 # setup tools

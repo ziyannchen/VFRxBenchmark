@@ -203,7 +203,7 @@ def main(frame_list, img_basename, cfg, args, verbose=True):
         #                      .run_async(pipe_stdin=True, pipe_stdout=True)
         #                      )
         for idx, frame in enumerate(clip):
-            if idx % cfg.clip.to_frame_interval == 0:
+            if cfg.clip.to_frame_interval != -1 and idx % cfg.clip.to_frame_interval == 0:
                 cv2.imwrite(f'{target_frame_dir}/{save_basename}_{str(idx).zfill(4)}.{cfg.db.save_ext}', frame, cfg.db.imwrite_arg)
             # ffmpeg_img2video.stdin.write(frame.tobytes())
         # ffmpeg_img2video.stdin.close()
@@ -238,7 +238,7 @@ def parse_input():
         help=('Frame interval to make a detection in tracking, trade-off '
               'between performance and fluency'),
         type=int, default=1)
-    parser.add_argument('-cfg', '--config_file', type=str, help="Config file path.", default='ytw.yaml')
+    parser.add_argument('-cfg', '--config_file', type=str, help="Config file path.", default='ytw.yaml') # bfrxlib/preprocess/cfg
     parser.add_argument('-p', '--prefix', type=str, default='')
     parser.add_argument('--save_meta', action='store_true', help='To save meta info(the clip info in the original raw frames).')
     # parser.add_argument('-l', '--only_keep_largest', action='store_true')
