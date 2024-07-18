@@ -231,7 +231,7 @@ def parse_input():
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('-i', '--input_path', help='Path to the input path. Support format [.mp4], [.jpg], [.png]', type=str, required=True)
+    parser.add_argument('-i', '--input_path', help='Path to the input path (media folder). Support format [.mp4], [.jpg], [.png]', type=str, required=True)
     parser.add_argument('-o', '--output_folder', help='Path to save visualized frames', type=str, default='results')
 
     parser.add_argument('--track_interval',

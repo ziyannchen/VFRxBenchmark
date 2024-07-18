@@ -1,6 +1,6 @@
 results/
 experiments/
-data/
+./data/
 weights/
 logs/
 tmp/
