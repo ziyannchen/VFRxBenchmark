@@ -43,3 +43,11 @@ def path_split(path, split_head):
     if target_path.startswith('/'):
         target_path = target_path[1:]
     return target_path
+
+
+def uncompress_file(compressed_file, target_dir=None):
+    assert os.path.exists(compressed_file)
+    if target_dir is None:
+        target_dir = os.path.dirname(compressed_file)
+        print(f'unzip {compressed_file} {target_dir}/')
+        os.system(f'unzip {compressed_file} -d {target_dir}/')

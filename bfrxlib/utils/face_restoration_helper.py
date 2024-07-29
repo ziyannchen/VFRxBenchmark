@@ -11,6 +11,9 @@ from basicsr.utils.img_util import img2tensor, imwrite
 from bfrxlib.utils.img_util import is_gray, bgr2gray
 
 
+'''Stole from facexlib: https://github.com/xinntao/facexlib/blob/master/facexlib/utils/face_restoration_helper.py'''
+
+
 def get_largest_face(det_faces, h, w):
 
     def get_location(val, length):

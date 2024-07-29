@@ -113,7 +113,7 @@ def rectify_cropped_clip(frame_list: list, clip_meta_list: list, det_pos_list: l
         if face_pos[2] - face_pos[0] <= 0 or face_pos[3] - face_pos[1] <= 0: 
             return [], []
 
-        # face vis
+        # uncomment to see visualization of the face cropping box
         # visualize_5landmark(frame, face_pos[4:].astype(np.int32))
         # visualize_bbox_rect(frame, face_pos.astype(np.int32))
         
@@ -140,9 +140,9 @@ def main(frame_list, img_basename, cfg, args, verbose=True):
     frame_interpolate = hasattr(cfg.det, 'frame_interpolate') and cfg.det.frame_interpolate
 
     det_net = init_detection_model(cfg.det.model, device=device, half=False)
-    tracker = SortTracker(det_net, cfg.det.conf_thresh, detect_interval=args.track_interval)
+    tracker = SortTracker(det_net, face_score_thresh=cfg.det.conf_thresh, detect_interval=args.track_interval)
     if cfg.to_refine:
-        recog_net = Descriptor(device=device, input_size=112)
+        recog_net = Descriptor(device=device)
 
     frame_h, frame_w = frame_list[0].shape[:2]
 
@@ -165,6 +165,8 @@ def main(frame_list, img_basename, cfg, args, verbose=True):
         save_basename = img_basename
         if verbose:
             print('saving to ', f'{clip_dir}/{save_basename}.mp4')
+
+        # Post-processing: Get the crop bbox
         clip, crop_bbox = rectify_cropped_clip(frame_list, clip_meta_list, det_pos_list, cfg.clip.save_size, frame_w, frame_h)
 
         if len(clip) == 0:
@@ -203,11 +205,14 @@ def main(frame_list, img_basename, cfg, args, verbose=True):
         #                      .run_async(pipe_stdin=True, pipe_stdout=True)
         #                      )
         for idx, frame in enumerate(clip):
+            imwrite_args = cfg.db.imwrite_arg if hasattr(cfg.db, 'imwrite_arg') else None
             if cfg.clip.to_frame_interval != -1 and idx % cfg.clip.to_frame_interval == 0:
-                cv2.imwrite(f'{target_frame_dir}/{save_basename}_{str(idx).zfill(4)}.{cfg.db.save_ext}', frame, cfg.db.imwrite_arg)
+                cv2.imwrite(f'{target_frame_dir}/{save_basename}_{str(idx).zfill(4)}.{cfg.db.save_ext}', frame, imwrite_args)
             # ffmpeg_img2video.stdin.write(frame.tobytes())
         # ffmpeg_img2video.stdin.close()
-        to_video_cmd = f'ffmpeg -y -framerate {cfg.clip.save_fps} -pattern_type glob -i {target_frame_dir}/\'*.{cfg.db.save_ext}\' -pix_fmt yuv420p -c:v libx264 {clip_dir}/{img_basename}.mp4'
+
+        # save mp4, p.s. use extra params to encode high-quality videos, e.g. '-qmin 1 -qmax 1' or use lower crf, 'setpts=PTS-STARTPTS -i ... -vsync 0' to align PTS
+        to_video_cmd = f'ffmpeg -y -framerate {cfg.clip.save_fps} -pattern_type glob -i {target_frame_dir}/\'*.{cfg.db.save_ext}\' -pix_fmt yuv420p -c:v libx264 {clip_dir}/{save_basename}.mp4'
         os.system(to_video_cmd)
 
         if args.save_meta:
@@ -238,7 +243,7 @@ def parse_input():
         help=('Frame interval to make a detection in tracking, trade-off '
               'between performance and fluency'),
         type=int, default=1)
-    parser.add_argument('-cfg', '--config_file', type=str, help="Config file path.", default='ytw.yaml') # bfrxlib/preprocess/cfg
+    parser.add_argument('-cfg', '--config_file', type=str, help="Config file path.", default='ytw') # bfrxlib/preprocess/cfg
     parser.add_argument('-p', '--prefix', type=str, default='')
     parser.add_argument('--save_meta', action='store_true', help='To save meta info(the clip info in the original raw frames).')
     # parser.add_argument('-l', '--only_keep_largest', action='store_true')
@@ -246,7 +251,7 @@ def parse_input():
 
     args = parser.parse_args()
 
-    args.config_file = os.path.join('bfrxlib/preprocess/cfg/', args.config_file)
+    args.config_file = os.path.join('bfrxlib/preprocess/cfg/', args.config_file + '.yaml')
     return args
 
 
@@ -273,6 +278,7 @@ if __name__ == '__main__':
             # input path is a dir of videos
             frame_list = video2images(input_path)
             img_basename = os.path.basename(input_path)[:-4].split('_')[0]
+            # img_basename = os.path.splitext(os.path.basename(input_path)[:-4])[0]
             if hasattr(cfg.db, 'id'):
                 img_basename = f'{cfg.db.id}_' + img_basename
             main(frame_list, img_basename, cfg, args, verbose)

@@ -1,13 +1,13 @@
 import cv2
 import math
 import numpy as np
-import os
+import os.path as osp
 import torch
 from torchvision.utils import make_grid
 from PIL import Image
 from torchvision.transforms.functional import normalize
 
-from basicsr.utils import img2tensor
+from basicsr.utils import img2tensor, scandir
 
 def is_gray(img, threshold=5):
     """

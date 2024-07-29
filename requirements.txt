@@ -1,6 +1,7 @@
 # require gcc > 5 & < 10
 natsort
-opencv-python==46.0.66 
+#==46.0.66 
+opencv-python
 torch>=1.7.1
 torchvision
 tqdm
@@ -16,7 +17,6 @@ ninja
 lpips
 arcface
 pyiqa # requires python<3.10
-# for serfiq
-# install mxnet-cuxxx according to ur cuda version
+# uncomment the next line for using serfiq # install mxnet-cuxxx according to ur cuda version
 # mxnet-cu117
 zipfile38 # for python3.8

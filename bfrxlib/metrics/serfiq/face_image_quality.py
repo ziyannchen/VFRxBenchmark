@@ -31,7 +31,7 @@ from sklearn.metrics.pairwise import euclidean_distances
 from .insightface.src import mtcnn_detector
 from .insightface.src import face_preprocess
 
-
+'''Stole from https://github.com/pterhoer/FaceImageQuality/blob/master/face_image_quality.py'''
 class SER_FIQ:
     def __init__(self,
                  gpu:int=0, # Which gpu should be used -> gpu id
@@ -59,7 +59,7 @@ class SER_FIQ:
         model_path = f"{CUR_DIR}/insightface/model/insightface-0000.params"
         if not os.path.exists(model_path):
             # model downloading from google drive
-            from basicsr.utils.download import download_file_from_google_drive
+            from basicsr.utils.download_util import download_file_from_google_drive
             from bfrxlib.utils.misc import uncompress_file
             file_id = '17fEWczMzTUDzRTv9qN3hFwVbkqRD7HE7'
             download_file = f'{CUR_DIR}/insightface/model/model.zip'
@@ -68,10 +68,10 @@ class SER_FIQ:
             uncompress_file(download_file)
 
         self.insightface = gluon.nn.SymbolBlock.imports(
-                                    f"{CUR_DIR}/insightface/model/insightface-symbol.json",
-                                    ['data'],
-                                    model_path, 
-                                    ctx=self.device
+                                f"{CUR_DIR}/insightface/model/insightface-symbol.json",
+                                ['data'],
+                                model_path, 
+                                ctx=self.device
                            )
         
         self.det_minsize = 50
@@ -81,13 +81,7 @@ class SER_FIQ:
         self.preprocess = face_preprocess.preprocess
         
         thrs = self.det_threshold if det==0 else [0.0,0.0,0.2]
-        
-        # self.detector = mtcnn_detector.MtcnnDetector(model_folder="./insightface/mtcnn-model/", 
-        #                                             ctx=self.device, 
-        #                                             num_worker=1, 
-        #                                             accurate_landmark = True, 
-        #                                             threshold=thrs
-        #                                             )
+
         self.detector = mtcnn_detector.MtcnnDetector(model_folder=f"{CUR_DIR}/insightface/mtcnn-model", 
                                                     ctx=self.device, 
                                                     num_worker=1, 

@@ -11,7 +11,7 @@ from facexlib.utils.face_restoration_helper import get_largest_face
 from bfrxlib.preprocess.models import Descriptor, clip_bbox
 from bfrxlib.preprocess.utils import video2images, load_frames
 from bfrxlib.preprocess.utils import read_pos_info
-from bfrxlib.metrics.basic import cal_similarity
+from bfrxlib.metrics.basic import cal_distance
 
 def detect_clip(frame_list, det_net='retinaface_resnet50', only_keep_largest=True):
     det_net = init_detection_model(det_net)
@@ -67,7 +67,7 @@ def recog_id_switch(frame_list, pos_list, recog_net=None, recog_threshold=1.0, d
     first = feat_matrix.pop(0)
     feat_matrix.append(first)
     feat_matrix_shift = torch.cat(feat_matrix, dim=0)
-    diff = cal_similarity(feat_matrix_ori, feat_matrix_shift, type='l2')
+    diff = cal_distance(feat_matrix_ori, feat_matrix_shift, dis_type='l2')
     diff = diff[:-1]
     
     # print(diff)

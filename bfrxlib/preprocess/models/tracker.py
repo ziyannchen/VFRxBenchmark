@@ -3,11 +3,28 @@ import torch
 import cv2
 from tqdm import tqdm
 
-from facexlib.detection import init_detection_model
 from facexlib.tracking.sort import SORT
 from facexlib.utils.face_restoration_helper import get_largest_face
 
 from .utils import clip_bbox
+
+def resize(image, max_size):
+    height, width = image.shape[:2]
+    scale = 1
+    if max(height, width) > max_size:
+        if height > width:
+            scale = max_size / height
+        else:
+            scale = max_size / width
+
+        # 计算新的尺寸
+        new_height = int(height * scale)
+        new_width = int(width * scale)
+
+        # 调整图片大小
+        image = cv2.resize(image, (new_width, new_height), interpolation=cv2.INTER_AREA)
+
+    return image, scale
 
 def interp(bbox1, bbox2, order='center', mode='linear'):
     '''
@@ -30,14 +47,20 @@ def interp(bbox1, bbox2, order='center', mode='linear'):
         raise NotImplementedError(f'interp mode {mode} not implemented')
 
 class SortTracker(SORT):
-    def __init__(self, det_net, face_score_thresh=0.97, detect_interval=1, max_age=1, min_hits=2, iou_threshold=0.2):
+    def __init__(self, det_net, *, input_size = 512, face_score_thresh=0.97, detect_interval=1, max_age=1, min_hits=2, iou_threshold=0.2):
         super(SortTracker, self).__init__(max_age, min_hits, iou_threshold)
+        '''
+        input_size: max input size. To save computing time, will resize the input to input_size if the exact size is larger.
+        '''
         # face detector
         self.det_net = det_net
         self.face_score_thresh = face_score_thresh
         self.detect_interval = detect_interval
 
+        self.input_size = input_size
+
     def _track_step(self, frame, only_keep_largest=False):
+        frame, scale = resize(frame, self.input_size)
         img_size = frame.shape[:2]
 
         # detection face bboxes
@@ -47,9 +70,9 @@ class SortTracker(SORT):
                 # only keep the largest face in every frame
                 # returns largest bbox and the largest idx
                 bboxes, _ = get_largest_face(bboxes, img_size[0], img_size[1])
-                bboxes = bboxes[np.newaxis, ...]
+                bboxes = bboxes[np.newaxis, ...] # [x0, y0, x1, y1, trace_face_id]
 
-            bboxes[..., :4] = clip_bbox(bboxes[..., :4], img_size[1], img_size[0])
+            bboxes[..., :4] = clip_bbox(bboxes[..., :4], img_size[1], img_size[0]) // scale
         
         return bboxes
 
@@ -68,6 +91,7 @@ class SortTracker(SORT):
                 # TODO: to support frame interpolation
                 pass
                 print('Interpolating')
+            
             face_list = bboxes[..., :5]
             additional_attr = bboxes[..., 4]
             trackers = self.update(np.array(face_list), frame_list[frame_id].shape[:2], additional_attr, self.detect_interval)
